@@ -2,28 +2,36 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useLocale } from "next-intl";
 import { fadeInUp, staggerContainer } from "@/app/component/lib/animations";
 
-const commodities = [
-  {
-    name: "Cocoa",
-    description: "Premium grade West African cocoa beans, ethically sourced and dried to perfection for global chocolate production.",
-    image: "/images/coco1.jpeg",
+const content = {
+  en: {
+    eyebrow: "Our Commodities",
+    title: "Premium African Soft Commodities",
+    body: "From cocoa to timber, we source and deliver the finest commodities from West and Central Africa.",
+    items: [
+      { name: "Cocoa", description: "Premium grade West African cocoa beans, ethically sourced and dried to perfection for global chocolate production.", image: "/images/coco1.jpeg" },
+      { name: "Cashew", description: "High-yield raw cashew nuts sourced from verified farms, ensuring consistent size, quality, and moisture content.", image: "/images/cashew.jpg" },
+      { name: "Timber", description: "Sustainably harvested tropical hardwood and timber, processed to meet rigorous international trade standards.", image: "/images/timber.jpg" },
+    ],
   },
-  {
-    name: "Cashew",
-    description: "High-yield raw cashew nuts sourced from verified farms, ensuring consistent size, quality, and moisture content.",
-    image: "/images/cashew.jpg",
+  fr: {
+    eyebrow: "Nos Matières Premières",
+    title: "Matières Premières Africaines de Qualité",
+    body: "Du cacao au bois, nous sourçons et livrons les meilleures matières premières d'Afrique de l'Ouest et Centrale.",
+    items: [
+      { name: "Cacao", description: "Fèves de cacao ouest-africaines de qualité supérieure, sourcées de manière éthique et séchées à la perfection pour la production chocolatière mondiale.", image: "/images/coco1.jpeg" },
+      { name: "Noix de Cajou", description: "Noix de cajou brutes à haut rendement, sourcées auprès de fermes vérifiées, garantissant une taille, une qualité et une humidité constantes.", image: "/images/cashew.jpg" },
+      { name: "Bois", description: "Bois tropical dur récolté de manière durable, transformé selon des normes commerciales internationales rigoureuses.", image: "/images/timber.jpg" },
+    ],
   },
-  {
-    name: "Timber",
-    description: "Sustainably harvested tropical hardwood and timber, processed to meet rigorous international trade standards.",
-    image: "/images/timber.jpg",
-  },
-  
-];
+};
 
 export default function Commodities() {
+  const locale = useLocale() as "en" | "fr";
+  const t = content[locale];
+
   return (
     <section className="py-15 bg-white">
       <div className="container mx-auto px-6">
@@ -36,13 +44,13 @@ export default function Commodities() {
           className="text-center max-w-2xl mx-auto mb-16"
         >
           <motion.span variants={fadeInUp} className="text-[#D4A017] font-bold tracking-widest text-sm uppercase">
-            Our Commodities
+            {t.eyebrow}
           </motion.span>
           <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-serif font-bold text-slate-900 mt-3 mb-6">
-            Premium African Soft Commodities
+            {t.title}
           </motion.h2>
           <motion.p variants={fadeInUp} className="text-gray-500 text-lg">
-            From cocoa to timber, we source and deliver the finest commodities from West and Central Africa.
+            {t.body}
           </motion.p>
         </motion.div>
 
@@ -54,7 +62,7 @@ export default function Commodities() {
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
-          {commodities.map((item, index) => (
+          {t.items.map((item, index) => (
             <motion.div
               key={index}
               variants={fadeInUp}
@@ -84,7 +92,6 @@ export default function Commodities() {
                   {item.description}
                 </p>
                 
-                {/* Subtle "Learn More" or Border detail */}
                 <div className="mt-6 w-10 h-1 bg-[#D4A017] rounded-full group-hover:w-full transition-all duration-500 opacity-30 group-hover:opacity-100" />
               </div>
             </motion.div>

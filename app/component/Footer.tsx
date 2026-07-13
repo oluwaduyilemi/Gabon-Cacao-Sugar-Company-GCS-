@@ -1,10 +1,14 @@
 
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import { Mail, MapPin } from "lucide-react";
 
 export default function Footer() {
+  const t = useTranslations("footer");
+  const nav = useTranslations("nav");
+
   return (
     <footer className="bg-[#3C2A21] text-gray-300 pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -16,25 +20,22 @@ export default function Footer() {
               GCS
             </h3>
             <p className="text-sm leading-relaxed text-gray-400">
-              Gabon Cacao & Sugar Company — bridging African producers with
-              international buyers through sustainable sourcing and
-              compliance-driven trade.
+              {t("about")}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
             <h4 className="text-white font-semibold mb-6 text-lg">
-              Quick Links
+              {t("quickLinks")}
             </h4>
             <ul className="space-y-4 text-sm">
-              <li><Link href="/" className="hover:text-[#D4AF37] transition-colors">Home</Link></li>
-              <li><Link href="/about" className="hover:text-[#D4AF37] transition-colors">About</Link></li>
-              <li><Link href="/services" className="hover:text-[#D4AF37] transition-colors">Services</Link></li>
-              <li><Link href="/career" className="hover:text-[#D4AF37] transition-colors">Careers</Link></li>
-              <li><Link href="/sustainability" className="hover:text-[#D4AF37] transition-colors">Sustainability</Link></li>
-              <li><Link href="/contact" className="hover:text-[#D4AF37] transition-colors">Contact</Link></li>
-              <li><Link href="/team" className="hover:text-[#D4AF37] transition-colors">Team</Link></li>
+              <li><Link href="/" className="hover:text-[#D4AF37] transition-colors">{nav("home")}</Link></li>
+              <li><Link href="/about" className="hover:text-[#D4AF37] transition-colors">{nav("about")}</Link></li>
+              <li><Link href="/sustainability" className="hover:text-[#D4AF37] transition-colors">{nav("sustainability")}</Link></li>
+              <li><Link href="/contact" className="hover:text-[#D4AF37] transition-colors">{nav("contact")}</Link></li>
+              <li><Link href="/team" className="hover:text-[#D4AF37] transition-colors">{nav("team")}</Link></li>
+              <li><Link href="/investor-centre" className="hover:text-[#D4AF37] transition-colors">{nav("investorCentre")}</Link></li>
 
             </ul>
           </div>
@@ -42,27 +43,27 @@ export default function Footer() {
           {/* Commodities */}
           <div>
             <h4 className="text-white font-semibold mb-6 text-lg">
-              Commodities
+              {nav("commodities")}
             </h4>
             <ul className="space-y-4 text-sm">
               <li>
                 <Link href="/commodities/cocoa" className="hover:text-[#D4AF37] transition-colors">
-                  Cocoa
+                  {nav("cocoa")}
                 </Link>
               </li>
               <li>
-                <Link href="/commodities/sugar" className="hover:text-[#D4AF37] transition-colors">
-                Cashew
+                <Link href="/commodities/cashew" className="hover:text-[#D4AF37] transition-colors">
+                {nav("cashew")}
                 </Link>
               </li>
               <li>
                 <Link href="/commodities/timber" className="hover:text-[#D4AF37] transition-colors">
-                  Timber
+                  {nav("timber")}
                 </Link>
               </li>
               <li>
                 <Link href="/commodities/sugar" className="hover:text-[#D4AF37] transition-colors">
-                  Sugar
+                  {nav("sugar")}
                 </Link>
               </li>
             </ul>
@@ -71,7 +72,7 @@ export default function Footer() {
           {/* Contact Info */}
           <div>
             <h4 className="text-white font-semibold mb-6 text-lg">
-              Contact
+              {nav("contact")}
             </h4>
 
             <div className="space-y-5 text-sm">
@@ -99,15 +100,15 @@ export default function Footer() {
         {/* Divider */}
         <div className="border-t border-white/10 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 gap-4">
           <p>
-            © {new Date().getFullYear()} Gabon Cacao & Sugar Company. All rights reserved.
+            {t("copyright", { year: new Date().getFullYear() })}
           </p>
 
           <div className="flex gap-8">
             <Link href="/privacy-policy" className="hover:text-[#D4AF37] transition-colors">
-              Privacy Policy
+              {t("privacyPolicy")}
             </Link>
             <Link href="/terms-of-service" className="hover:text-[#D4AF37] transition-colors">
-              Terms of Service
+              {t("termsOfService")}
             </Link>
           </div>
         </div>

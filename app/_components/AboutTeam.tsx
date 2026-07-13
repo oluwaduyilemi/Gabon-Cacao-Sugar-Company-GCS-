@@ -3,25 +3,32 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useLocale } from "next-intl";
 import { fadeInUp, staggerContainer } from "@/app/component/lib/animations";
 
-const team = [
-  {
-    name: "Charles-Daniel TCHEN",
-    role: "CEO & Founder",
-    bio: "Visionary entrepreneur restoring Gabon's agricultural legacy through global trade partnerships.",
-    image: "/images/ceo.jpeg", 
+const content = {
+  en: {
+    eyebrow: "Leadership",
+    title: "Meet Our Team",
+    team: [
+      { name: "Charles-Daniel TCHEN", role: "CEO & Founder", bio: "Visionary entrepreneur restoring Gabon's agricultural legacy through global trade partnerships.", image: "/images/ceo.jpeg" },
+      { name: "William BRUCE-VANDERPUYE", role: "Chief Operating Manager", bio: "Experienced commodity professional driving operational excellence across African and international markets.", image: "/images/director.jpg" },
+    ],
   },
-  {
-    name: "William BRUCE-VANDERPUYE",
-    role: "Chief Operating Manager",
-    bio: "Experienced commodity professional driving operational excellence across African and international markets.",
-    image: "/images/director.jpg",
+  fr: {
+    eyebrow: "Direction",
+    title: "Rencontrez Notre Équipe",
+    team: [
+      { name: "Charles-Daniel TCHEN", role: "PDG & Fondateur", bio: "Entrepreneur visionnaire restaurant l'héritage agricole du Gabon à travers des partenariats commerciaux mondiaux.", image: "/images/ceo.jpeg" },
+      { name: "William BRUCE-VANDERPUYE", role: "Directeur Général des Opérations", bio: "Professionnel expérimenté des matières premières, moteur de l'excellence opérationnelle sur les marchés africains et internationaux.", image: "/images/director.jpg" },
+    ],
   },
-
-];
+};
 
 export default function AboutTeam() {
+  const locale = useLocale() as "en" | "fr";
+  const t = content[locale];
+
   return (
     <section className="py-15 bg-white">
       <div className="container mx-auto px-6">
@@ -34,10 +41,10 @@ export default function AboutTeam() {
           className="text-center mb-20"
         >
           <motion.span variants={fadeInUp} className="text-[#D4A017] font-bold tracking-[0.2em] text-xs uppercase">
-            Leadership
+            {t.eyebrow}
           </motion.span>
           <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-serif font-bold text-slate-900 mt-4">
-            Meet Our Team
+            {t.title}
           </motion.h2>
         </motion.div>
 
@@ -49,7 +56,7 @@ export default function AboutTeam() {
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-5xl mx-auto"
         >
-          {team.map((member, index) => (
+          {t.team.map((member, index) => (
             <motion.div
               key={index}
               variants={fadeInUp}

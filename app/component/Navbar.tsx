@@ -2,14 +2,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { Link, usePathname } from "@/i18n/navigation";
+import { useTranslations, useLocale } from "next-intl";
 import Image from "next/image";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X, Lock, Globe } from "lucide-react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const t = useTranslations("nav");
+  const locale = useLocale();
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,12 +24,13 @@ export default function Navbar() {
   }, []);
 
   const commodityLinks = [
-    { name: "Cocoa", href: "/commodities/cocoa" },
-    { name: "Cashew", href: "/commodities/cashew" },
-    { name: "Timber", href: "/commodities/timber" }, 
-    { name: "Sugar", href: "/commodities/sugar" }, 
-
+    { name: t("cocoa"), href: "/commodities/cocoa" },
+    { name: t("cashew"), href: "/commodities/cashew" },
+    { name: t("timber"), href: "/commodities/timber" },
+    { name: t("sugar"), href: "/commodities/sugar" },
   ];
+
+  const otherLocale = locale === "en" ? "fr" : "en";
 
   return (
     <header
@@ -55,11 +60,11 @@ export default function Navbar() {
           {/* Desktop Menu */}
           <nav className="hidden lg:flex items-center space-x-7 text-[13px] uppercase tracking-wider font-semibold text-white/90">
             <Link href="/" className="hover:text-[#D4AF37] transition-colors">
-              Home
+              {t("home")}
             </Link>
 
             <Link href="/about" className="hover:text-[#D4AF37] transition-colors">
-              About
+              {t("about")}
             </Link>
 
             {/* Dropdown Container */}
@@ -69,7 +74,7 @@ export default function Navbar() {
               onMouseLeave={() => setIsDropdownOpen(false)}
             >
               <button className="flex items-center gap-1.5 hover:text-[#D4AF37] transition-colors outline-none cursor-default">
-                Commodities
+                {t("commodities")}
                 <ChevronDown
                   size={14}
                   className={`transition-transform duration-300 ${
@@ -91,7 +96,7 @@ export default function Navbar() {
                 <div className="py-2">
                   {commodityLinks.map((item) => (
                     <Link
-                      key={item.name}
+                      key={item.href}
                       href={item.href}
                       className="block px-6 py-3 text-sm hover:bg-amber-50 hover:text-[#D4AF37] transition-colors font-medium normal-case tracking-normal"
                     >
@@ -102,34 +107,40 @@ export default function Navbar() {
               </div>
             </div>
 
-            <Link href="/services" className="hover:text-[#D4AF37] transition-colors">
-              Services
-            </Link>
-
-            <Link href="/career" className="hover:text-[#D4AF37] transition-colors">
-              Careers
-            </Link>
-
             <Link href="/sustainability" className="hover:text-[#D4AF37] transition-colors">
-              Sustainability
+              {t("sustainability")}
             </Link>
 
             <Link href="/news" className="hover:text-[#D4AF37] transition-colors">
-              News
+              {t("news")}
             </Link>
 
              <Link href="/team" className="hover:text-[#D4AF37] transition-colors">
-              Team
+              {t("team")}
+            </Link>
+
+            <Link href="/investor-centre" className="flex items-center gap-1.5 hover:text-[#D4AF37] transition-colors">
+              {t("investorCentre")}
+              <Lock size={12} />
             </Link>
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden lg:flex items-center ml-4">
+          {/* Language Switch + CTA Button */}
+          <div className="hidden lg:flex items-center gap-4 ml-4">
+            <Link
+              href={pathname}
+              locale={otherLocale}
+              className="flex items-center gap-1.5 text-white/90 hover:text-[#D4AF37] transition-colors text-xs font-bold uppercase tracking-widest"
+            >
+              <Globe size={14} />
+              {otherLocale}
+            </Link>
+
             <Link
               href="/contact"
               className="bg-[#D4AF37] text-black px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300 shadow-md"
             >
-              Contact
+              {t("contact")}
             </Link>
           </div>
 
@@ -150,21 +161,21 @@ export default function Navbar() {
         }`}
       >
         <div className="flex flex-col space-y-6 px-8 text-base font-medium">
-          <Link href="/" onClick={() => setIsOpen(false)}>Home</Link>
-          <Link href="/about" onClick={() => setIsOpen(false)}>About</Link>
+          <Link href="/" onClick={() => setIsOpen(false)}>{t("home")}</Link>
+          <Link href="/about" onClick={() => setIsOpen(false)}>{t("about")}</Link>
           
           <div className="space-y-4">
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               className="flex items-center justify-between w-full text-[#D4AF37]"
             >
-              Commodities
+              {t("commodities")}
               <ChevronDown size={18} className={isDropdownOpen ? "rotate-180" : ""} />
             </button>
             {isDropdownOpen && (
               <div className="flex flex-col space-y-4 pl-4 border-l border-[#D4AF37]/30">
                 {commodityLinks.map((item) => (
-                  <Link key={item.name} href={item.href} onClick={() => setIsOpen(false)} className="text-gray-300">
+                  <Link key={item.href} href={item.href} onClick={() => setIsOpen(false)} className="text-gray-300">
                     {item.name}
                   </Link>
                 ))}
@@ -172,12 +183,24 @@ export default function Navbar() {
             )}
           </div>
 
-          <Link href="/services" onClick={() => setIsOpen(false)}>Services</Link>
-          <Link href="/career" onClick={() => setIsOpen(false)}>Careers</Link>
-          <Link href="/sustainability" onClick={() => setIsOpen(false)}>Sustainability</Link>
-          <Link href="/news" onClick={() => setIsOpen(false)}>News</Link>
-          <Link href="/team" onClick={() => setIsOpen(false)}>Team</Link>
-          <Link href="/contact" onClick={() => setIsOpen(false)}>Contact</Link>
+          <Link href="/sustainability" onClick={() => setIsOpen(false)}>{t("sustainability")}</Link>
+          <Link href="/news" onClick={() => setIsOpen(false)}>{t("news")}</Link>
+          <Link href="/team" onClick={() => setIsOpen(false)}>{t("team")}</Link>
+          <Link href="/investor-centre" onClick={() => setIsOpen(false)} className="flex items-center gap-1.5">
+            {t("investorCentre")}
+            <Lock size={14} />
+          </Link>
+          <Link href="/contact" onClick={() => setIsOpen(false)}>{t("contact")}</Link>
+
+          <Link
+            href={pathname}
+            locale={otherLocale}
+            onClick={() => setIsOpen(false)}
+            className="flex items-center gap-1.5 text-[#D4AF37]"
+          >
+            <Globe size={16} />
+            {otherLocale === "fr" ? "Français" : "English"}
+          </Link>
         </div>
       </div>
     </header>

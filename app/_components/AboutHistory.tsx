@@ -1,22 +1,32 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocale } from "next-intl";
 import { fadeInUp, staggerContainer } from "@/app/component/lib/animations";
 
-const cards = [
-  {
-    title: "Our Vision",
-    description: "To become West Africa's most trusted soft-commodities partner, championing transparency, compliance, and sustainability in every transaction.",
-    label: "Vision"
+const content = {
+  en: {
+    eyebrow: "Vision & Mission",
+    title: "Building Sustainable Trade Bridges",
+    cards: [
+      { title: "Our Vision", description: "To become West Africa's most trusted soft-commodities partner, championing transparency, compliance, and sustainability in every transaction." },
+      { title: "Our Mission", description: "To connect African producers with global buyers through a fair, transparent value chain that ensures sustainable sourcing, long-term partnerships, and adherence to international compliance standards." },
+    ],
   },
-  {
-    title: "Our Mission",
-    description: "To connect African producers with global buyers through a fair, transparent value chain that ensures sustainable sourcing, long-term partnerships, and adherence to international compliance standards.",
-    label: "Mission"
-  }
-];
+  fr: {
+    eyebrow: "Vision & Mission",
+    title: "Bâtir des Ponts Commerciaux Durables",
+    cards: [
+      { title: "Notre Vision", description: "Devenir le partenaire de confiance le plus fiable d'Afrique de l'Ouest en matières premières, en défendant la transparence, la conformité et la durabilité dans chaque transaction." },
+      { title: "Notre Mission", description: "Relier les producteurs africains aux acheteurs mondiaux à travers une chaîne de valeur juste et transparente, garantissant un approvisionnement durable, des partenariats à long terme et le respect des normes de conformité internationales." },
+    ],
+  },
+};
 
 export default function AboutVision() {
+  const locale = useLocale() as "en" | "fr";
+  const t = content[locale];
+
   return (
     <section className="py-24 bg-white">
       <div className="container mx-auto px-6">
@@ -32,13 +42,13 @@ export default function AboutVision() {
             variants={fadeInUp}
             className="text-[#D4A017] font-bold tracking-[0.2em] text-xs uppercase"
           >
-            Vision & Mission
+            {t.eyebrow}
           </motion.span>
           <motion.h2 
             variants={fadeInUp}
             className="text-4xl md:text-5xl font-serif font-bold text-slate-900 mt-4"
           >
-            Building Sustainable Trade Bridges
+            {t.title}
           </motion.h2>
         </motion.div>
 
@@ -50,7 +60,7 @@ export default function AboutVision() {
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto"
         >
-          {cards.map((card, index) => (
+          {t.cards.map((card, index) => (
             <motion.div
               key={index}
               variants={fadeInUp}

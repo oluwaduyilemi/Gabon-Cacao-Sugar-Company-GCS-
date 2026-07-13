@@ -2,28 +2,36 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocale } from "next-intl";
 import { Play, X } from "lucide-react";
 import { fadeInUp, staggerContainer } from "@/app/component/lib/animations";
 
-const videos = [
-  {
-    title: "Cocoa Farm Origins",
-    duration: "0:16",
-    src: "/images/onevideo.mp4", 
+const content = {
+  en: {
+    eyebrow: "Behind the Scenes",
+    title: "GCS in Motion",
+    body: "Explore our operations, partnerships, and impact across the supply chain.",
+    videos: [
+      { title: "Cocoa Farm Origins", duration: "0:16", src: "/images/onevideo.mp4" },
+      { title: "Global Logistics Network", duration: "0:15", src: "/images/vedioone.mp4" },
+      { title: "Processing & Quality Control", duration: "0:07", src: "/images/coovideo.mp4" },
+    ],
   },
-  {
-    title: "Global Logistics Network",
-    duration: "0:15",
-    src: "/images/vedioone.mp4",
+  fr: {
+    eyebrow: "Dans les Coulisses",
+    title: "GCS en Mouvement",
+    body: "Découvrez nos opérations, nos partenariats et notre impact tout au long de la chaîne d'approvisionnement.",
+    videos: [
+      { title: "Origines de la Ferme de Cacao", duration: "0:16", src: "/images/onevideo.mp4" },
+      { title: "Réseau Logistique Mondial", duration: "0:15", src: "/images/vedioone.mp4" },
+      { title: "Transformation et Contrôle Qualité", duration: "0:07", src: "/images/coovideo.mp4" },
+    ],
   },
-  {
-    title: "Processing & Quality Control",
-    duration: "0:07",
-    src: "/images/coovideo.mp4",
-  }
-];
+};
 
 export default function VideoGallery() {
+  const locale = useLocale() as "en" | "fr";
+  const t = content[locale];
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
   return (
@@ -38,13 +46,13 @@ export default function VideoGallery() {
           className="text-center max-w-3xl mx-auto mb-20" 
         >
           <motion.span variants={fadeInUp} className="text-[#D4AF37] uppercase tracking-[0.3em] text-xs font-bold mb-4 block">
-            Behind the Scenes
+            {t.eyebrow}
           </motion.span>
           <motion.h2 variants={fadeInUp} className="text-4xl md:text-6xl font-serif font-bold text-slate-900 mb-8 leading-tight">
-            GCS in Motion
+            {t.title}
           </motion.h2>
           <motion.p variants={fadeInUp} className="text-gray-500 text-lg md:text-xl leading-relaxed">
-            Explore our operations, partnerships, and impact across the supply chain.
+            {t.body}
           </motion.p>
         </motion.div>
 
@@ -55,14 +63,13 @@ export default function VideoGallery() {
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-3 gap-12"
         >
-          {videos.map((video, idx) => (
+          {t.videos.map((video, idx) => (
             <motion.div 
               key={idx} 
               variants={fadeInUp} 
               className="group cursor-pointer"
               onClick={() => setActiveVideo(video.src)}
             >
-              {/* Changed aspect-video (16/9) to aspect-[16/11] for a taller, more square-ish look */}
               <div className="relative aspect-[14/11] rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] mb-8 bg-black transition-all duration-500 group-hover:shadow-[0_30px_60px_rgba(212,175,55,0.15)]">
                 
                 <video

@@ -2,17 +2,16 @@
 
 import { motion, useMotionValue, useTransform, animate, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { useLocale } from "next-intl";
 
 function Counter({ value, suffix = "" }: { value: number; suffix?: string }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   
-  // Create a state to hold the display number
   const [displayValue, setDisplayValue] = useState(0);
 
   useEffect(() => {
     if (isInView) {
-      // Animate from 0 to the target value
       const controls = animate(0, value, {
         duration: 2,
         ease: "easeOut",
@@ -31,13 +30,24 @@ function Counter({ value, suffix = "" }: { value: number; suffix?: string }) {
   );
 }
 
-export default function SustainabilityStats() {
-  const stats = [
+const content = {
+  en: [
     { label: "Farming families supported", value: 500, suffix: "+" },
     { label: "Supply chain traceability target", value: 100, suffix: "%" },
     { label: "Continents served", value: 4, suffix: "" },
     { label: "EUDR", value: "EUDR", isText: true, subLabel: "Compliance aligned" },
-  ];
+  ],
+  fr: [
+    { label: "Familles agricoles soutenues", value: 500, suffix: "+" },
+    { label: "Objectif de traçabilité de la chaîne", value: 100, suffix: "%" },
+    { label: "Continents desservis", value: 4, suffix: "" },
+    { label: "RDUE", value: "RDUE", isText: true, subLabel: "Conformité alignée" },
+  ],
+};
+
+export default function SustainabilityStats() {
+  const locale = useLocale() as "en" | "fr";
+  const stats = content[locale];
 
   return (
     <section className="bg-[#D4AF37] py-10 md:py-19">

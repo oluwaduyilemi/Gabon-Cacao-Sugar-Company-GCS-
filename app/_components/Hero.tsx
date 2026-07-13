@@ -2,11 +2,32 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link"; 
+import { Link } from "@/i18n/navigation";
 import { motion } from "framer-motion";
+import { useLocale } from "next-intl";
 import { fadeInUp, staggerContainer } from "@/app/component/lib/animations";
 
+const content = {
+  en: {
+    titleLine1: "Premium Cocoa",
+    titleLine2: "Structured for Global Trade",
+    body: "Gabon Cacao & Sugar Company structures, sources, and executes compliant cocoa trade flows connecting verified West African producers with qualified global buyers.",
+    ctaPrimary: "Request Trade Inquiry",
+    ctaSecondary: "Explore Our Commodities",
+  },
+  fr: {
+    titleLine1: "Cacao Premium",
+    titleLine2: "Structuré pour le Commerce Mondial",
+    body: "Gabon Cacao & Sugar Company structure, sourcé et exécute des flux commerciaux de cacao conformes, reliant des producteurs ouest-africains vérifiés à des acheteurs internationaux qualifiés.",
+    ctaPrimary: "Demander une Consultation Commerciale",
+    ctaSecondary: "Découvrir Nos Matières Premières",
+  },
+};
+
 export default function Hero() {
+  const locale = useLocale() as "en" | "fr";
+  const t = content[locale];
+
   return (
     <section className="relative h-screen w-full flex items-center overflow-hidden bg-black">
       <motion.div 
@@ -37,9 +58,9 @@ export default function Hero() {
             variants={fadeInUp}
             className="text-5xl md:text-6xl pt-15 font-serif font-bold text-white leading-tight"
           >
-            Premium Cocoa <br />
+            {t.titleLine1} <br />
             <span className="text-[#D4A017]">
-              Structured for Global Trade
+              {t.titleLine2}
             </span>
           </motion.h1>
 
@@ -47,9 +68,7 @@ export default function Hero() {
             variants={fadeInUp}
             className="mt-6 text-lg md:text-xl text-gray-200 leading-relaxed max-w-2xl"
           >
-            Gabon Cacao & Sugar Company structures, sources, and executes 
-            compliant cocoa trade flows connecting verified West African 
-            producers with qualified global buyers.
+            {t.body}
           </motion.p>
 
           <motion.div 
@@ -58,13 +77,13 @@ export default function Hero() {
           >
             <Link href="/contact">
               <button className="px-8 py-3 bg-[#D4A017] hover:bg-[#B8860B] text-black font-bold rounded-sm transition-all duration-300">
-                Request Trade Inquiry
+                {t.ctaPrimary}
               </button>
             </Link>
 
             <Link href="/commodities/cocoa">
               <button className="px-8 py-3 bg-white/5 hover:bg-white/10 text-white font-semibold backdrop-blur-md border border-white/20 rounded-sm transition-all duration-300">
-                Explore Our Commodities
+                {t.ctaSecondary}
               </button>
             </Link>
           </motion.div>

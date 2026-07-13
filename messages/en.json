@@ -1,0 +1,23 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "commodities": "Commodities",
+    "cocoa": "Cocoa",
+    "cashew": "Cashew",
+    "timber": "Timber",
+    "sugar": "Sugar",
+    "sustainability": "Sustainability",
+    "news": "News",
+    "team": "Team",
+    "investorCentre": "Investor Centre",
+    "contact": "Contact"
+  },
+  "footer": {
+    "about": "Gabon Cacao & Sugar Company — bridging African producers with international buyers through sustainable sourcing and compliance-driven trade.",
+    "quickLinks": "Quick Links",
+    "copyright": "© {year} Gabon Cacao & Sugar Company. All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service"
+  }
+}

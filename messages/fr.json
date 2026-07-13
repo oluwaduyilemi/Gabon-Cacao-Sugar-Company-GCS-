@@ -1,0 +1,23 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À Propos",
+    "commodities": "Matières Premières",
+    "cocoa": "Cacao",
+    "cashew": "Noix de Cajou",
+    "timber": "Bois",
+    "sugar": "Sucre",
+    "sustainability": "Durabilité",
+    "news": "Actualités",
+    "team": "Équipe",
+    "investorCentre": "Espace Investisseurs",
+    "contact": "Contact"
+  },
+  "footer": {
+    "about": "Gabon Cacao & Sugar Company — reliant les producteurs africains aux acheteurs internationaux grâce à un approvisionnement durable et un commerce conforme.",
+    "quickLinks": "Liens Rapides",
+    "copyright": "© {year} Gabon Cacao & Sugar Company. Tous droits réservés.",
+    "privacyPolicy": "Politique de Confidentialité",
+    "termsOfService": "Conditions d'Utilisation"
+  }
+}

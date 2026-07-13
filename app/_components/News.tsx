@@ -1,33 +1,41 @@
 
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { motion } from "framer-motion";
+import { useLocale } from "next-intl";
 import { ArrowRight } from "lucide-react";
 import { fadeInUp, staggerContainer } from "@/app/component/lib/animations";
 
-const newsItems = [
-  {
-    date: "Feb 2025",
-    title: "GCS at Chocoa 2025 & 2026",
-    excerpt: "GCS participated in the world's leading cocoa conference, presenting sustainable sourcing initiatives.",
-    slug: "gcs-at-chocoa-2025",
+const content = {
+  en: {
+    eyebrow: "News & Impact",
+    title: "Latest From GCS",
+    viewAll: "View All News",
+    readMore: "Read more",
+    items: [
+      { date: "Feb 2025", title: "GCS at Chocoa 2025 & 2026", excerpt: "GCS participated in the world's leading cocoa conference, presenting sustainable sourcing initiatives." },
+      { date: "Jan 2025", title: "Supporting Our Farmers", excerpt: "Our cocoa bag distribution initiative reached over 500 farming families across Gabon." },
+      { date: "Dec 2024", title: "Sustainability Commitment", excerpt: "GCS announces compliance roadmap for EU Deforestation Regulation across all supply chains." },
+    ],
   },
-  {
-    date: "Jan 2025",
-    title: "Supporting Our Farmers",
-    excerpt: "Our cocoa bag distribution initiative reached over 500 farming families across Gabon.",
-    slug: "supporting-our-farmers",
+  fr: {
+    eyebrow: "Actualités & Impact",
+    title: "Dernières Nouvelles de GCS",
+    viewAll: "Voir Toutes les Actualités",
+    readMore: "Lire la suite",
+    items: [
+      { date: "Fév 2025", title: "GCS à Chocoa 2025 & 2026", excerpt: "GCS a participé à la principale conférence mondiale sur le cacao, présentant ses initiatives d'approvisionnement durable." },
+      { date: "Jan 2025", title: "Soutenir Nos Agriculteurs", excerpt: "Notre initiative de distribution de sacs de cacao a touché plus de 500 familles agricoles à travers le Gabon." },
+      { date: "Déc 2024", title: "Engagement pour la Durabilité", excerpt: "GCS annonce sa feuille de route de conformité au règlement européen sur la déforestation pour toutes ses chaînes d'approvisionnement." },
+    ],
   },
-  {
-    date: "Dec 2024",
-    title: "Sustainability Commitment",
-    excerpt: "GCS announces compliance roadmap for EU Deforestation Regulation across all supply chains.",
-    slug: "sustainability-commitment",
-  },
-];
+};
 
 export default function News() {
+  const locale = useLocale() as "en" | "fr";
+  const t = content[locale];
+
   return (
     <section className="py-24 bg-white">
       <div className="container mx-auto px-6">
@@ -41,10 +49,10 @@ export default function News() {
         >
           <div className="max-w-2xl">
             <motion.span variants={fadeInUp} className="text-[#D4A017] font-bold tracking-[0.2em] text-xs uppercase block mb-4">
-              News & Impact
+              {t.eyebrow}
             </motion.span>
             <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-serif font-bold text-slate-900 tracking-tight">
-              Latest From GCS
+              {t.title}
             </motion.h2>
           </div>
           
@@ -53,7 +61,7 @@ export default function News() {
               href="/news" 
               className="group flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-slate-900 hover:text-[#D4A017] transition-colors"
             >
-              View All News 
+              {t.viewAll}
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
@@ -66,7 +74,7 @@ export default function News() {
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
-          {newsItems.map((article, index) => (
+          {t.items.map((article, index) => (
             <motion.div
               key={index}
               variants={fadeInUp}
@@ -86,7 +94,7 @@ export default function News() {
                 href="/news" 
                 className="inline-flex items-center text-[#D4A017] text-xs uppercase tracking-widest font-bold group/link"
               >
-                Read more
+                {t.readMore}
                 <motion.span
                   className="ml-2"
                   animate={{ x: [0, 4, 0] }}

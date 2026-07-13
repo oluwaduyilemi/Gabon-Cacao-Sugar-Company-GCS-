@@ -2,24 +2,38 @@
 
 import { motion } from "framer-motion";
 import { Globe } from "lucide-react";
+import { useLocale } from "next-intl";
 import { fadeInUp, staggerContainer } from "@/app/component/lib/animations";
 
-const locations = [
-  {
-    city: "Libreville, Gabon",
-    role: "Headquarters & Sourcing Hub",
+const content = {
+  en: {
+    eyebrow: "Global Presence",
+    title: "Offices & Operations",
+    body: "Strategic locations connecting African sourcing with international demand.",
+    locations: [
+      { city: "Libreville, Gabon", role: "Headquarters & Sourcing Hub" },
+      { city: "London, UK", role: "European Commercial Operations" },
+      { city: "Seychelles", role: "Trade & Financial Services" },
+    ],
+    footer: "Operational regions: Africa • Europe • Middle East • Asia",
   },
-  {
-    city: "London, UK",
-    role: "European Commercial Operations",
+  fr: {
+    eyebrow: "Présence Mondiale",
+    title: "Bureaux & Opérations",
+    body: "Des emplacements stratégiques reliant l'approvisionnement africain à la demande internationale.",
+    locations: [
+      { city: "Libreville, Gabon", role: "Siège Social & Pôle d'Approvisionnement" },
+      { city: "Londres, Royaume-Uni", role: "Opérations Commerciales Européennes" },
+      { city: "Seychelles", role: "Services Commerciaux et Financiers" },
+    ],
+    footer: "Régions opérationnelles : Afrique • Europe • Moyen-Orient • Asie",
   },
-  {
-    city: "Seychelles",
-    role: "Trade & Financial Services",
-  },
-];
+};
 
 export default function GlobalPresence() {
+  const locale = useLocale() as "en" | "fr";
+  const t = content[locale];
+
   return (
     <section className="py-15 bg-slate-50/50">
       <div className="container mx-auto px-6">
@@ -32,13 +46,13 @@ export default function GlobalPresence() {
           className="text-center max-w-3xl mx-auto mb-16"
         >
           <motion.span variants={fadeInUp} className="text-[#D4A017] font-bold tracking-[0.2em] text-xs uppercase">
-            Global Presence
+            {t.eyebrow}
           </motion.span>
           <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-serif font-bold text-slate-900 mt-4 mb-6">
-            Offices & Operations
+            {t.title}
           </motion.h2>
           <motion.p variants={fadeInUp} className="text-gray-500 text-lg">
-            Strategic locations connecting African sourcing with international demand.
+            {t.body}
           </motion.p>
         </motion.div>
 
@@ -50,7 +64,7 @@ export default function GlobalPresence() {
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16"
         >
-          {locations.map((office, index) => (
+          {t.locations.map((office, index) => (
             <motion.div
               key={index}
               variants={fadeInUp}
@@ -78,7 +92,7 @@ export default function GlobalPresence() {
           className="text-center"
         >
           <p className="text-gray-400 text-sm font-medium tracking-wide uppercase">
-            Operational regions: Africa • Europe • Middle East • Asia
+            {t.footer}
           </p>
         </motion.div>
       </div>
