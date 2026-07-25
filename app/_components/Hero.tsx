@@ -11,7 +11,6 @@ const content = {
   en: {
     titleLine1: "Premium Cocoa",
     titleLine2: "Structured for Global Trade",
-    body: "Gabon Cacao & Sugar Company structures, sources, and executes compliant cocoa trade flows connecting verified West African producers with qualified global buyers.",
     ctaPrimary: "Request Trade Inquiry",
     ctaSecondary: "Explore Our Commodities",
   },
@@ -63,13 +62,6 @@ export default function Hero() {
               {t.titleLine2}
             </span>
           </motion.h1>
-
-          <motion.p 
-            variants={fadeInUp}
-            className="mt-6 text-lg md:text-xl text-gray-200 leading-relaxed max-w-2xl"
-          >
-            {t.body}
-          </motion.p>
 
           <motion.div 
             variants={fadeInUp} 

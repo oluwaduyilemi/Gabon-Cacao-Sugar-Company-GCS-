@@ -12,11 +12,11 @@ interface NewsCardProps {
 
 export default function NewsCard({ badge, headline, description, meta, imageSrc }: NewsCardProps) {
   return (
-    <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-gray-50 pt-16 px-6 sm:px-8 overflow-hidden">
+    <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-white pt-16 px-6 sm:px-8 overflow-hidden">
       
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         
-        <div className="bg-[#FFFFFF] rounded-3xl p-8 md:p-12 shadow-sm border border-stone-100 flex flex-col md:flex-row items-center gap-8 md:gap-12 font-sans text-left">
+        <div className="bg-gray-50 rounded-3xl p-8 md:p-12 shadow-sm border border-[#3C2A21]/10 flex flex-col md:flex-row items-center gap-8 md:gap-12 font-sans text-left">
           
           <div className="flex-1 space-y-6 order-2 md:order-1">
             

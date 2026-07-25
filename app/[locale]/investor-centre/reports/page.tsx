@@ -3,30 +3,59 @@
 import { motion } from "framer-motion";
 import { useLocale } from "next-intl";
 import { fadeInUp, staggerContainer } from "@/app/component/lib/animations";
-import { FileDown } from "lucide-react";
+import { FileDown, FileText } from "lucide-react";
 
-// Placeholder data — replace `href` with real PDF paths (e.g. in /public/documents/)
-// once the client provides the actual files.
 const content = {
   en: {
     title: "Reports & Presentations",
     body: "Download our latest financial reports, results presentations and investor materials.",
-    reports: [
-      { title: "Q2 2026 Investor Presentation", date: "To be added" },
-      { title: "Annual Report 2025", date: "To be added" },
-      { title: "Q1 2026 Financial Results", date: "To be added" },
+    comingSoon: "Coming soon",
+    categories: [
+      {
+        name: "Investor Presentations",
+        items: [
+          {
+            title: "DFI Investor Deck — Industrial Cocoa Transformation Platform",
+            date: "June 2026",
+            href: "/documents/gcs-investor-deck.pdf",
+          },
+        ],
+      },
+      {
+        name: "Quarterly Results",
+        items: [{ title: "Q1 2026 Financial Results", date: null, href: null }],
+      },
+      {
+        name: "Annual Reports",
+        items: [{ title: "Annual Report 2026", date: null, href: null }],
+      },
     ],
-    note: "Documents will be added here as they become available.",
   },
   fr: {
     title: "Rapports et Présentations",
     body: "Téléchargez nos derniers rapports financiers, présentations de résultats et documents destinés aux investisseurs.",
-    reports: [
-      { title: "Présentation aux Investisseurs T2 2026", date: "À venir" },
-      { title: "Rapport Annuel 2025", date: "À venir" },
-      { title: "Résultats Financiers T1 2026", date: "À venir" },
+    comingSoon: "Bientôt disponible",
+    categories: [
+      {
+        name: "Présentations aux Investisseurs",
+        items: [
+          {
+            title: "Dossier Investisseurs DFI — Plateforme Industrielle de Transformation du Cacao",
+            date: "Juin 2026",
+            href: "/documents/gcs-investor-deck.pdf",
+          },
+        ],
+      },
+      {
+        name: "Résultats Trimestriels",
+        items: [{ title: "Résultats Financiers T1 2026", date: null, href: null }],
+      },
+      {
+        name: "Rapports Annuels",
+        items: [{ title: "Rapport Annuel 2025", date: null, href: null }],
+      },
     ],
-    note: "Les documents seront ajoutés ici dès qu'ils seront disponibles.",
+    note: "D'autres documents seront ajoutés ici dès qu'ils seront disponibles.",
   },
 };
 
@@ -50,32 +79,60 @@ export default function ReportsPresentations() {
           </motion.h1>
           <motion.p
             variants={fadeInUp}
-            className="text-gray-500 mb-12 max-w-2xl"
+            className="text-gray-500 mb-14 max-w-2xl"
           >
             {t.body}
           </motion.p>
 
-          <motion.div variants={fadeInUp} className="divide-y divide-black/5 border-y border-black/5">
-            {t.reports.map((report) => (
-              <a
-                key={report.title}
-                href="#"
-                className="flex items-center justify-between py-6 group hover:bg-[#F9F7F2] transition-colors px-4 -mx-4 rounded-lg"
-              >
-                <div>
-                  <p className="font-semibold text-slate-900 group-hover:text-[#D4AF37] transition-colors">
-                    {report.title}
-                  </p>
-                  <p className="text-sm text-gray-400 mt-1">{report.date}</p>
+          <div className="space-y-12">
+            {t.categories.map((category) => (
+              <motion.div key={category.name} variants={fadeInUp}>
+                <h2 className="text-xs font-bold uppercase tracking-widest text-[#3C2A21]/50 mb-4">
+                  {category.name}
+                </h2>
+                <div className="divide-y divide-black/5 border-y border-black/5">
+                  {category.items.map((report) =>
+                    report.href ? (
+                      <a
+                        key={report.title}
+                        href={report.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        download
+                        className="flex items-center gap-4 py-5 group hover:bg-[#F9F7F2] transition-colors px-4 -mx-4 rounded-lg"
+                      >
+                        <div className="w-9 h-9 rounded-lg bg-amber-50 flex items-center justify-center shrink-0">
+                          <FileText size={16} className="text-[#D4AF37]" />
+                        </div>
+                        <div className="flex-grow">
+                          <p className="font-semibold text-slate-900 group-hover:text-[#D4AF37] transition-colors">
+                            {report.title}
+                          </p>
+                          <p className="text-sm text-gray-400 mt-0.5">{report.date}</p>
+                        </div>
+                        <FileDown size={18} className="text-[#D4AF37] shrink-0" />
+                      </a>
+                    ) : (
+                      <div
+                        key={report.title}
+                        className="flex items-center gap-4 py-5 px-4 -mx-4 opacity-50"
+                      >
+                        <div className="w-9 h-9 rounded-lg bg-gray-100 flex items-center justify-center shrink-0">
+                          <FileText size={16} className="text-gray-400" />
+                        </div>
+                        <div className="flex-grow">
+                          <p className="font-semibold text-slate-500">
+                            {report.title}
+                          </p>
+                          <p className="text-sm text-gray-400 mt-0.5">{t.comingSoon}</p>
+                        </div>
+                      </div>
+                    )
+                  )}
                 </div>
-                <FileDown size={20} className="text-[#D4AF37] shrink-0" />
-              </a>
+              </motion.div>
             ))}
-          </motion.div>
-
-          <motion.p variants={fadeInUp} className="text-sm text-gray-400 mt-8">
-            {t.note}
-          </motion.p>
+          </div>
         </motion.div>
       </div>
     </section>

@@ -6,7 +6,7 @@ export default function InvestorCentreLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="bg-white pt-15 min-h-screen">
+    <main className="bg-white pt-26 min-h-screen">
       <InvestorNav />
       {children}
     </main>

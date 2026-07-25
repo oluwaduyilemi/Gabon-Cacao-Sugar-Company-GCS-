@@ -3,35 +3,42 @@
 import { motion } from "framer-motion";
 import { useLocale } from "next-intl";
 import { fadeInUp, staggerContainer } from "@/app/component/lib/animations";
+import { Users, LineChart } from "lucide-react";
+import TradeSpecification from "@/app/_components/TradeSpecification";
+import InvestorEmptyState from "@/app/_components/InvestorEmptyState";
 
 const content = {
   en: {
     title: "Share & Analytical Info",
     body: "Key data on our share price, shareholder structure and analyst coverage.",
-    stats: [
-      { label: "Share price", value: "—" },
-      { label: "Market cap", value: "—" },
-      { label: "Shares outstanding", value: "—" },
+    specEyebrow: "Share Overview",
+    specNote: "Figures will be updated here once GCS's share is publicly listed and trading data becomes available.",
+    specs: [
+      { label: "Share Price", value: "—" },
+      { label: "Market Cap", value: "—" },
+      { label: "Shares Outstanding", value: "—" },
       { label: "Ticker", value: "—" },
     ],
-    topShareholders: "Top shareholders",
-    topShareholdersBody: "Shareholder breakdown will be added here.",
-    analystCoverage: "Analyst coverage",
-    analystCoverageBody: "Analyst coverage details will be added here.",
+    topShareholders: "Top Shareholders",
+    topShareholdersBody: "Shareholder breakdown will be published here.",
+    analystCoverage: "Analyst Coverage",
+    analystCoverageBody: "Analyst coverage details will be published here.",
   },
   fr: {
     title: "Actions et Analyses",
     body: "Données clés sur le cours de notre action, la structure actionnariale et la couverture par les analystes.",
-    stats: [
-      { label: "Cours de l'action", value: "—" },
-      { label: "Capitalisation boursière", value: "—" },
-      { label: "Actions en circulation", value: "—" },
-      { label: "Symbole boursier", value: "—" },
+    specEyebrow: "Aperçu de l'Action",
+    specNote: "Les chiffres seront mis à jour ici dès que l'action de GCS sera cotée publiquement et que les données de transaction seront disponibles.",
+    specs: [
+      { label: "Cours de l'Action", value: "—" },
+      { label: "Capitalisation Boursière", value: "—" },
+      { label: "Actions en Circulation", value: "—" },
+      { label: "Symbole Boursier", value: "—" },
     ],
-    topShareholders: "Principaux actionnaires",
-    topShareholdersBody: "La répartition des actionnaires sera ajoutée ici.",
-    analystCoverage: "Couverture par les analystes",
-    analystCoverageBody: "Les détails de la couverture par les analystes seront ajoutés ici.",
+    topShareholders: "Principaux Actionnaires",
+    topShareholdersBody: "La répartition des actionnaires sera publiée ici.",
+    analystCoverage: "Couverture par les Analystes",
+    analystCoverageBody: "Les détails de la couverture par les analystes seront publiés ici.",
   },
 };
 
@@ -53,43 +60,13 @@ export default function ShareInfo() {
             {t.body}
           </motion.p>
 
-          <motion.div
-            variants={fadeInUp}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
-          >
-            {t.stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="bg-[#F9F7F2] rounded-2xl p-6 text-center border border-black/5"
-              >
-                <p className="text-2xl font-serif font-bold text-slate-900 mb-1">
-                  {stat.value}
-                </p>
-                <p className="text-xs uppercase tracking-wider text-gray-400">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
+          <motion.div variants={fadeInUp} className="mb-16">
+            <TradeSpecification eyebrow={t.specEyebrow} note={t.specNote} rows={t.specs} />
           </motion.div>
 
-          <motion.div variants={fadeInUp} className="space-y-10">
-            <div>
-              <h2 className="text-xl font-serif font-semibold text-slate-900 mb-2">
-                {t.topShareholders}
-              </h2>
-              <p className="text-gray-500 text-sm">
-                {t.topShareholdersBody}
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-xl font-serif font-semibold text-slate-900 mb-2">
-                {t.analystCoverage}
-              </h2>
-              <p className="text-gray-500 text-sm">
-                {t.analystCoverageBody}
-              </p>
-            </div>
+          <motion.div variants={fadeInUp} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <InvestorEmptyState icon={Users} title={t.topShareholders} body={t.topShareholdersBody} />
+            <InvestorEmptyState icon={LineChart} title={t.analystCoverage} body={t.analystCoverageBody} />
           </motion.div>
         </motion.div>
       </div>

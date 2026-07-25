@@ -3,29 +3,34 @@
 import { motion } from "framer-motion";
 import { useLocale } from "next-intl";
 import { fadeInUp, staggerContainer } from "@/app/component/lib/animations";
+import TradeSpecification from "@/app/_components/TradeSpecification";
 
 const content = {
   en: {
     title: "Key Figures",
     body: "A summary of our key financial and operational highlights.",
-    figures: [
+    specEyebrow: "Financial Highlights",
+    specNote: "Detailed financial statements and comparative tables will be published here once available.",
+    specs: [
       { label: "Revenue", value: "—" },
       { label: "EBITDA", value: "—" },
-      { label: "Net income", value: "—" },
-      { label: "Production", value: "—" },
+      { label: "Net Income", value: "—" },
+      { label: "Export Volume", value: "—" },
+      { label: "Reporting Period", value: "—" },
     ],
-    note: "Detailed financial tables will be added here.",
   },
   fr: {
     title: "Chiffres Clés",
     body: "Un résumé de nos principaux indicateurs financiers et opérationnels.",
-    figures: [
-      { label: "Chiffre d'affaires", value: "—" },
+    specEyebrow: "Faits Saillants Financiers",
+    specNote: "Les états financiers détaillés et les tableaux comparatifs seront publiés ici dès qu'ils seront disponibles.",
+    specs: [
+      { label: "Chiffre d'Affaires", value: "—" },
       { label: "EBITDA", value: "—" },
-      { label: "Résultat net", value: "—" },
-      { label: "Production", value: "—" },
+      { label: "Résultat Net", value: "—" },
+      { label: "Volume d'Exportation", value: "—" },
+      { label: "Période de Référence", value: "—" },
     ],
-    note: "Des tableaux financiers détaillés seront ajoutés ici.",
   },
 };
 
@@ -47,28 +52,9 @@ export default function KeyFigures() {
             {t.body}
           </motion.p>
 
-          <motion.div
-            variants={fadeInUp}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6"
-          >
-            {t.figures.map((figure) => (
-              <div
-                key={figure.label}
-                className="bg-[#F9F7F2] rounded-2xl p-6 text-center border border-black/5"
-              >
-                <p className="text-2xl font-serif font-bold text-slate-900 mb-1">
-                  {figure.value}
-                </p>
-                <p className="text-xs uppercase tracking-wider text-gray-400">
-                  {figure.label}
-                </p>
-              </div>
-            ))}
+          <motion.div variants={fadeInUp}>
+            <TradeSpecification eyebrow={t.specEyebrow} note={t.specNote} rows={t.specs} />
           </motion.div>
-
-          <motion.p variants={fadeInUp} className="text-sm text-gray-400 mt-8">
-            {t.note}
-          </motion.p>
         </motion.div>
       </div>
     </section>

@@ -36,7 +36,6 @@ export default function InvestorNav() {
   const locale = useLocale() as "en" | "fr";
   const t = content[locale];
 
-  // The login page has no session yet, so skip the section nav there.
   if (pathname?.startsWith("/investor-centre/login")) {
     return null;
   }
@@ -48,7 +47,7 @@ export default function InvestorNav() {
   }
 
   return (
-    <div className="sticky top-[72px] z-40 bg-[#F9F7F2] border-b border-black/5">
+    <div className="sticky top-[72px] z-40 bg-[#F9F7F2] pt-2 border-b border-black/5">
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between overflow-x-auto">
         <nav className="flex gap-6 py-4 text-[13px] uppercase tracking-wider font-semibold text-[#3C2A21] whitespace-nowrap">
           {t.links.map((link) => {

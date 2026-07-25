@@ -54,8 +54,8 @@ export default function NewsContent() {
   const t = content[locale];
 
   return (
-    <section className="py-15 bg-gray-50">
-      <div className="container mx-auto px-6 max-w-5xl">
+    <section className="py-15 bg-white">
+      <div className="container mx-auto max-w-5xl">
         <motion.div 
           variants={staggerContainer}
           initial="hidden"

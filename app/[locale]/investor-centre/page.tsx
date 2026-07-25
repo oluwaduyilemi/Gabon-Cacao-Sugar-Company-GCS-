@@ -4,12 +4,18 @@ import { motion } from "framer-motion";
 import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { fadeInUp, staggerContainer } from "@/app/component/lib/animations";
-import { FileText, TrendingUp, Calendar, ShieldCheck } from "lucide-react";
+import { FileText, TrendingUp, Calendar, ShieldCheck, ArrowRight } from "lucide-react";
+import FeaturedDocument from "@/app/_components/featuredDocument";
 
 const content = {
   en: {
     title: "Investor Centre",
     body: "A dedicated space for our shareholders, analysts and financial partners — with our latest reports, financial data and governance information in one place.",
+    featuredEyebrow: "Latest Investor Materials",
+    featuredTitle: "DFI Investor Deck — Industrial Cocoa Transformation Platform",
+    featuredDate: "June 2026",
+    downloadLabel: "Download Presentation",
+    quickLinksTitle: "Explore the Investor Centre",
     quickLinks: [
       { name: "Reports & Presentations", href: "/investor-centre/reports", description: "Download our latest reports, presentations and results." },
       { name: "Share & Analytical Info", href: "/investor-centre/share-info", description: "Share price data, shareholder structure and analyst coverage." },
@@ -20,6 +26,11 @@ const content = {
   fr: {
     title: "Espace Investisseurs",
     body: "Un espace dédié à nos actionnaires, analystes et partenaires financiers — regroupant nos derniers rapports, données financières et informations de gouvernance en un seul endroit.",
+    featuredEyebrow: "Derniers Documents Investisseurs",
+    featuredTitle: "Dossier Investisseurs DFI — Plateforme Industrielle de Transformation du Cacao",
+    featuredDate: "Juin 2026",
+    downloadLabel: "Télécharger la Présentation",
+    quickLinksTitle: "Explorer l'Espace Investisseurs",
     quickLinks: [
       { name: "Rapports et Présentations", href: "/investor-centre/reports", description: "Téléchargez nos derniers rapports, présentations et résultats." },
       { name: "Actions et Analyses", href: "/investor-centre/share-info", description: "Données sur le cours de l'action, structure actionnariale et couverture par les analystes." },
@@ -37,7 +48,7 @@ export default function InvestorOverview() {
 
   return (
     <>
-      <section className="relative pt-20 pb-16 bg-white overflow-hidden">
+      <section className="relative pt-22 pb-14 bg-white overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-amber-900/10 via-transparent to-transparent pointer-events-none" />
 
         <div className="container relative z-10 mx-auto px-6 text-center">
@@ -63,26 +74,67 @@ export default function InvestorOverview() {
         </div>
       </section>
 
+      <section className="pb-16 px-6 bg-white">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto"
+        >
+          <FeaturedDocument
+            eyebrow={t.featuredEyebrow}
+            title={t.featuredTitle}
+            date={t.featuredDate}
+            href="/documents/gcs-investor-deck.pdf"
+            downloadLabel={t.downloadLabel}
+          />
+        </motion.div>
+      </section>
+
       <section className="py-16 bg-[#F9F7F2] px-6">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {t.quickLinks.map((item, idx) => {
-            const Icon = icons[idx];
-            return (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-black/5"
-              >
-                <Icon size={26} className="text-[#D4AF37] mb-4" />
-                <h3 className="text-xl font-serif font-semibold text-slate-900 mb-2 group-hover:text-[#D4AF37] transition-colors">
-                  {item.name}
-                </h3>
-                <p className="text-gray-500 text-sm leading-relaxed">
-                  {item.description}
-                </p>
-              </Link>
-            );
-          })}
+        <div className="max-w-6xl mx-auto">
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-sm font-bold uppercase tracking-widest text-[#3C2A21]/50 mb-8"
+          >
+            {t.quickLinksTitle}
+          </motion.h2>
+
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+          >
+            {t.quickLinks.map((item, idx) => {
+              const Icon = icons[idx];
+              return (
+                <motion.div key={item.name} variants={fadeInUp}>
+                  <Link
+                    href={item.href}
+                    className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-black/5 flex flex-col h-full"
+                  >
+                    <Icon size={26} className="text-[#D4AF37] mb-4" />
+                    <h3 className="text-xl font-serif font-semibold text-slate-900 mb-2 group-hover:text-[#D4AF37] transition-colors">
+                      {item.name}
+                    </h3>
+                    <p className="text-gray-500 text-sm leading-relaxed flex-grow">
+                      {item.description}
+                    </p>
+                    <span className="inline-flex items-center gap-1.5 text-[#D4AF37] text-xs font-bold uppercase tracking-widest mt-6">
+                      {locale === "fr" ? "Voir" : "View"}
+                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
       </section>
     </>

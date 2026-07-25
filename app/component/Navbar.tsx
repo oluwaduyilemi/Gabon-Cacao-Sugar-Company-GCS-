@@ -41,17 +41,17 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-18">
 <Link href="/" className="flex items-center shrink-0">
   <div className="relative w-[140px] h-[70px] md:w-[160px] md:h-[81px]"> 
-    <Image
-      src="/images/trans.png" 
+    {/* <Image
+      src="/images/chalogo.jpeg" 
       alt="GCS Commodities"
       fill
       priority
       className="object-contain brightness-130 contrast-150 saturate-150" 
       sizes="(max-width: 1000px) 140px, 160px"
-    />
+    /> */}
   </div>
 </Link>
     
@@ -113,10 +113,6 @@ export default function Navbar() {
 
             <Link href="/news" className="hover:text-[#D4AF37] transition-colors">
               {t("news")}
-            </Link>
-
-             <Link href="/team" className="hover:text-[#D4AF37] transition-colors">
-              {t("team")}
             </Link>
 
             <Link href="/investor-centre" className="flex items-center gap-1.5 hover:text-[#D4AF37] transition-colors">

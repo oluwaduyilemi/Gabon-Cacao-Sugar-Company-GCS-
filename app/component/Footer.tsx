@@ -34,7 +34,6 @@ export default function Footer() {
               <li><Link href="/about" className="hover:text-[#D4AF37] transition-colors">{nav("about")}</Link></li>
               <li><Link href="/sustainability" className="hover:text-[#D4AF37] transition-colors">{nav("sustainability")}</Link></li>
               <li><Link href="/contact" className="hover:text-[#D4AF37] transition-colors">{nav("contact")}</Link></li>
-              <li><Link href="/team" className="hover:text-[#D4AF37] transition-colors">{nav("team")}</Link></li>
               <li><Link href="/investor-centre" className="hover:text-[#D4AF37] transition-colors">{nav("investorCentre")}</Link></li>
 
             </ul>

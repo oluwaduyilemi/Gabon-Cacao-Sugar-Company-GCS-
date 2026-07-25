@@ -4,6 +4,7 @@ import { useLocale } from "next-intl";
 import NewsCard from "../../_components/NewsCard";
 import NewsContent from "../../_components/NewsContent";
 import NewsHero from "../../_components/NewsHero";
+import NewsVideoFeature from "../../_components/NewsVideoFeature";
 
 const ACFIF_ARTICLE = {
   en: {
@@ -29,10 +30,16 @@ export default function News() {
   return (
       <main className="bg-white pt-15 pb-10">
         <NewsHero/>
-        <div className="container mx-auto max-w-5xl space-y-12">
+        <div className="container mx-auto max-w-6xl space-y-12">
+          <NewsVideoFeature
+            videoSrc="/images/reo-video.mp4"
+            posterSrc="/images/presentent.jpeg"
+            photoSrc="/images/reo-comm.jpeg"
+          />
         <NewsCard {...article} />
         </div>
         <NewsContent/>
+        
       </main>
   );
 }
