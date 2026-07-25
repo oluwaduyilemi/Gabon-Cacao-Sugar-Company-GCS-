@@ -11,7 +11,6 @@ const content = {
       { name: "Overview", href: "/investor-centre" },
       { name: "Reports & Presentations", href: "/investor-centre/reports" },
       { name: "Share & Analytical Info", href: "/investor-centre/share-info" },
-      { name: "Key Figures", href: "/investor-centre/key-figures" },
       { name: "Financial Calendar", href: "/investor-centre/financial-calendar" },
       { name: "Governance", href: "/investor-centre/governance" },
     ],
@@ -22,7 +21,6 @@ const content = {
       { name: "Aperçu", href: "/investor-centre" },
       { name: "Rapports et Présentations", href: "/investor-centre/reports" },
       { name: "Actions et Analyses", href: "/investor-centre/share-info" },
-      { name: "Chiffres Clés", href: "/investor-centre/key-figures" },
       { name: "Calendrier Financier", href: "/investor-centre/financial-calendar" },
       { name: "Gouvernance", href: "/investor-centre/governance" },
     ],
@@ -47,7 +45,7 @@ export default function InvestorNav() {
   }
 
   return (
-    <div className="sticky top-[72px] z-40 bg-[#F9F7F2] pt-2 border-b border-black/5">
+    <div className="sticky top-[84px] z-40 bg-[#F9F7F2] pt-6 border-b border-black/5">
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between overflow-x-auto">
         <nav className="flex gap-6 py-4 text-[13px] uppercase tracking-wider font-semibold text-[#3C2A21] whitespace-nowrap">
           {t.links.map((link) => {

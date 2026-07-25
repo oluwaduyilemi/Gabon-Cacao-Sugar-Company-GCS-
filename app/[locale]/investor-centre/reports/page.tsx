@@ -23,13 +23,14 @@ const content = {
       },
       {
         name: "Quarterly Results",
-        items: [{ title: "Q1 2026 Financial Results", date: null, href: null }],
+        items: [{ title: "Q4 2026 Financial Results", date: null, href: null }],
       },
       {
         name: "Annual Reports",
         items: [{ title: "Annual Report 2026", date: null, href: null }],
       },
     ],
+    note: "More documents will be added here as they become available.",
   },
   fr: {
     title: "Rapports et Présentations",
@@ -48,11 +49,11 @@ const content = {
       },
       {
         name: "Résultats Trimestriels",
-        items: [{ title: "Résultats Financiers T1 2026", date: null, href: null }],
+        items: [{ title: "Résultats Financiers T4 2026", date: null, href: null }],
       },
       {
         name: "Rapports Annuels",
-        items: [{ title: "Rapport Annuel 2025", date: null, href: null }],
+        items: [{ title: "Rapport Annuel 2026", date: null, href: null }],
       },
     ],
     note: "D'autres documents seront ajoutés ici dès qu'ils seront disponibles.",
