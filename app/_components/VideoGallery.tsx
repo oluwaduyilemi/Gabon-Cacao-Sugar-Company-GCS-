@@ -35,7 +35,7 @@ export default function VideoGallery() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
   return (
-    <section className="py-32  bg-[#FDFBF7]">
+    <section className="py-32  bg-white">
       <div className="container mx-auto px-6">
         
         <motion.div 
