@@ -41,17 +41,17 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 px-8">
-        <div className="flex justify-between items-center h-18">
+        <div className="flex justify-between items-center h-24">
 <Link href="/" className="flex items-center shrink-0">
-  <div className="relative w-[140px] h-[70px] md:w-[160px] md:h-[81px]"> 
-    {/* <Image
-      src="/images/chalogo.jpeg" 
+  <div className="relative w-[220px] h-[110px] md:w-[260px] md:h-[135px]"> 
+    <Image
+      src="/images/gcs-logo-transparent-white-text.png" 
       alt="GCS Commodities"
       fill
       priority
-      className="object-contain brightness-130 contrast-150 saturate-150" 
-      sizes="(max-width: 1000px) 140px, 160px"
-    /> */}
+      className="object-contain" 
+      sizes="(max-width: 1000px) 240px, 300px"
+    />
   </div>
 </Link>
     
@@ -181,7 +181,6 @@ export default function Navbar() {
 
           <Link href="/sustainability" onClick={() => setIsOpen(false)}>{t("sustainability")}</Link>
           <Link href="/news" onClick={() => setIsOpen(false)}>{t("news")}</Link>
-          <Link href="/team" onClick={() => setIsOpen(false)}>{t("team")}</Link>
           <Link href="/investor-centre" onClick={() => setIsOpen(false)} className="flex items-center gap-1.5">
             {t("investorCentre")}
             <Lock size={14} />
